@@ -1,228 +1,273 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Switch view from 2D to 3D | Sample | ArcGIS Maps SDK for JavaScript</title>
 
-    <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
-    <script type="module" src="https://js.arcgis.com/5.0/"></script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Switch view from 2D to 3D | Sample | ArcGIS Maps SDK for JavaScript</title>
 
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
+  <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
+  <script type="module" src="https://js.arcgis.com/5.0/"></script>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #view-control-container {
+      position: absolute;
+      top: 15px;
+      left: 60px;
+    }
+
+    arcgis-map,
+    arcgis-scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 400ms ease,
+        visibility 400ms ease;
+
+      &.visible {
+        opacity: 1;
+        visibility: visible;
       }
+    }
+  </style>
+</head>
 
-      #view-control-container {
-        position: absolute;
-        top: 15px;
-        left: 60px;
+<body>
+  <arcgis-map item-id="6c8db1a136a24bb5970c0e9563f23c26" center="-111.9, 40.7" class="visible" scale="200000">
+    <calcite-panel slot="top-right" id="title" heading="SE Data Viewer"
+      description="Use the button to switch dimensions">
+    </calcite-panel>
+    <arcgis-zoom slot="top-left"></arcgis-zoom>
+    <arcgis-legend slot="bottom-right"></arcgis-legend>
+
+    <calcite-panel slot="bottom-left" id="controls" heading="Change Display Properties">
+
+      <calcite-select id="varSelect1" label-text="Variable:">
+        <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
+        <calcite-option value="POP PROJECTIONS by TAZ">Population</calcite-option>
+        <calcite-option value="IND PROJECTIONS by TAZ">Industrial Jobs</calcite-option>
+        <calcite-option value="OTHR PROJECTIONS by TAZ">Office Jobs</calcite-option>
+        <calcite-option value="RTL PROJECTIONS by TAZ">Retail Jobs</calcite-option>
+        <calcite-option value="AEMP PROJECTIONS by TAZ">Total Jobs</calcite-option>
+        <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
+      </calcite-select><br />
+
+
+      <calcite-select id="yearSelect1" label-text="Year:">
+        <calcite-option value="2023" selected>2023</calcite-option>
+        <calcite-option value="2025">2025</calcite-option>
+        <calcite-option value="2030">2030</calcite-option>
+        <calcite-option value="2035">2035</calcite-option>
+        <calcite-option value="2045">2045</calcite-option>
+        <calcite-option value="2050">2050</calcite-option>
+        <calcite-option value="2055">2055</calcite-option>
+      </calcite-select><br />
+
+
+    </calcite-panel>
+  </arcgis-map>
+
+  <arcgis-scene item-id="72ecbc8e2c944657ae7d300ab4f8a345" center="-111.9, 40.7" scale="200000" camera-tilt="45">
+    <calcite-panel slot="top-right" id="title" heading="SE Data Viewer"
+      description="Use the button to switch dimensions">
+    </calcite-panel>
+    <arcgis-zoom slot="top-left"></arcgis-zoom>
+    <arcgis-navigation-toggle slot="top-left"></arcgis-navigation-toggle>
+    <arcgis-compass slot="top-left"></arcgis-compass>
+    <arcgis-legend slot="bottom-right"></arcgis-legend>
+
+    <calcite-panel slot="bottom-left" id="controls" heading="Change Display Properties">
+
+      <calcite-select id="varSelect2" label-text="Variable:">
+        <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
+        <calcite-option value="POP PROJECTIONS by TAZ">Population</calcite-option>
+        <calcite-option value="IND PROJECTIONS by TAZ">Industrial Jobs</calcite-option>
+        <calcite-option value="OTHR PROJECTIONS by TAZ">Office Jobs</calcite-option>
+        <calcite-option value="RTL PROJECTIONS by TAZ">Retail Jobs</calcite-option>
+        <calcite-option value="AEMP PROJECTIONS by TAZ">Total Jobs</calcite-option>
+        <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
+      </calcite-select><br />
+
+
+      <calcite-select id="yearSelect2" label-text="Year:">
+        <calcite-option value="2023" selected>2023</calcite-option>
+        <calcite-option value="2025">2025</calcite-option>
+        <calcite-option value="2030">2030</calcite-option>
+        <calcite-option value="2035">2035</calcite-option>
+        <calcite-option value="2045">2045</calcite-option>
+        <calcite-option value="2050">2050</calcite-option>
+        <calcite-option value="2055">2055</calcite-option>
+      </calcite-select><br />
+
+      <calcite-slider id="heightSlider2" label-text="Change Height:" value="10" step="10" min="0" max="100" snap=true
+        label-handles label-ticks </calcite-slider><br />
+    </calcite-panel>
+
+
+
+  </arcgis-scene>
+
+  <div id="view-control-container">
+    <calcite-button alignment="start" appearance="outline-fill" kind="neutral" id="to-3D">3D</calcite-button>
+  </div>
+
+  <script type="module">
+    const mapViewElement = document.querySelector("arcgis-map");
+    const sceneViewElement = document.querySelector("arcgis-scene");
+    const switchViewButton = document.querySelector("calcite-button");
+
+    await mapViewElement.viewOnReady();
+    await sceneViewElement.viewOnReady();
+
+    const showAndHide = (elementToShow, elementToHide) => {
+      elementToShow.classList.add("visible");
+      elementToHide.classList.remove("visible");
+    };
+
+    const switchView = (button) => {
+      const is2D = button.id === "to-3D"; // Check if switching from 2D.
+      // Clone the viewpoint from the currently visible view.
+      const activeViewpoint = is2D
+        ? mapViewElement.viewpoint.clone()
+        : sceneViewElement.viewpoint.clone();
+      // This adjusts for Web Mercator distortion in 2D maps which causes scale to increase with latitude.
+      const scaleConversionFactor = Math.cos(
+        (activeViewpoint.targetGeometry.latitude * Math.PI) / 180,
+      );
+
+      button.id = is2D ? "to-2D" : "to-3D";
+      button.textContent = is2D ? "2D" : "3D";
+
+      if (is2D) {
+        // 2D → 3D: Remove distortion by shrinking the scale (zoom in to match true ground distance).
+        activeViewpoint.scale *= scaleConversionFactor;
+        sceneViewElement.viewpoint = activeViewpoint; // Set target viewpoint to current viewpoint.
+        showAndHide(sceneViewElement, mapViewElement);
+      } else {
+        // 3D → 2D: Add distortion by inflating the scale (zoom out to match perceived 2D zoom).
+        activeViewpoint.scale /= scaleConversionFactor;
+        mapViewElement.viewpoint = activeViewpoint; // Set target viewpoint to current viewpoint.
+        showAndHide(mapViewElement, sceneViewElement);
       }
+    };
 
-      arcgis-map,
-      arcgis-scene {
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        visibility: hidden;
-        transition:
-          opacity 400ms ease,
-          visibility 400ms ease;
-
-        &.visible {
-          opacity: 1;
-          visibility: visible;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <arcgis-map
-      item-id="6c8db1a136a24bb5970c0e9563f23c26"
-      center="-111.9, 40.7"
-      class="visible"
-      scale="200000">
-      <calcite-panel
-        slot="top-right"
-        id="title"
-        heading="SE Data Viewer"
-        description="Use the button to switch dimensions">
-      </calcite-panel>
-      <arcgis-zoom slot="top-left"></arcgis-zoom>
-      <arcgis-legend slot="bottom-right"></arcgis-legend>
-      <calcite-select slot="bottom-left" id="yearSelect1" label-text="Year:">
-            <calcite-option value="2023" selected>2023</calcite-option>
-            <calcite-option value="2025">2025</calcite-option>
-            <calcite-option value="2030">2030</calcite-option>
-            <calcite-option value="2035">2035</calcite-option>
-            <calcite-option value="2045">2045</calcite-option>
-            <calcite-option value="2050">2050</calcite-option>
-            <calcite-option value="2055">2055</calcite-option> </calcite-select
-          ><br />
-    </arcgis-map>
-
-    <arcgis-scene
-      item-id="72ecbc8e2c944657ae7d300ab4f8a345"
-      center="-111.9, 40.7"
-      scale="200000"
-      camera-tilt="45">
-      <calcite-panel
-        slot="top-right"
-        id="title"
-        heading="SE Data Viewer"
-        description="Use the button to switch dimensions">
-      </calcite-panel>
-      <arcgis-zoom slot="top-left"></arcgis-zoom>
-      <arcgis-navigation-toggle slot="top-left"></arcgis-navigation-toggle>
-      <arcgis-compass slot="top-left"></arcgis-compass>
-      <arcgis-legend slot="bottom-right"></arcgis-legend>
-      <calcite-select slot="bottom-left" id="yearSelect2"  label-text="Year:">
-            <calcite-option value="2023" selected>2023</calcite-option>
-            <calcite-option value="2025">2025</calcite-option>
-            <calcite-option value="2030">2030</calcite-option>
-            <calcite-option value="2035">2035</calcite-option>
-            <calcite-option value="2045">2045</calcite-option>
-            <calcite-option value="2050">2050</calcite-option>
-            <calcite-option value="2055">2055</calcite-option> </calcite-select
-          ><br />
-    </arcgis-scene>
-
-    <div id="view-control-container">
-      <calcite-button alignment="start" appearance="outline-fill" kind="neutral" id="to-3D"
-        >3D</calcite-button
-      >
-    </div>
-
-    <script type="module">
-      const mapViewElement = document.querySelector("arcgis-map");
-      const sceneViewElement = document.querySelector("arcgis-scene");
-      const switchViewButton = document.querySelector("calcite-button");
-
-      await mapViewElement.viewOnReady();
-      await sceneViewElement.viewOnReady();
-
-      const showAndHide = (elementToShow, elementToHide) => {
-        elementToShow.classList.add("visible");
-        elementToHide.classList.remove("visible");
-      };
-
-      const switchView = (button) => {
-        const is2D = button.id === "to-3D"; // Check if switching from 2D.
-        // Clone the viewpoint from the currently visible view.
-        const activeViewpoint = is2D
-          ? mapViewElement.viewpoint.clone()
-          : sceneViewElement.viewpoint.clone();
-        // This adjusts for Web Mercator distortion in 2D maps which causes scale to increase with latitude.
-        const scaleConversionFactor = Math.cos(
-          (activeViewpoint.targetGeometry.latitude * Math.PI) / 180,
-        );
-
-        button.id = is2D ? "to-2D" : "to-3D";
-        button.textContent = is2D ? "2D" : "3D";
-
-        if (is2D) {
-          // 2D → 3D: Remove distortion by shrinking the scale (zoom in to match true ground distance).
-          activeViewpoint.scale *= scaleConversionFactor;
-          sceneViewElement.viewpoint = activeViewpoint; // Set target viewpoint to current viewpoint.
-          showAndHide(sceneViewElement, mapViewElement);
-        } else {
-          // 3D → 2D: Add distortion by inflating the scale (zoom out to match perceived 2D zoom).
-          activeViewpoint.scale /= scaleConversionFactor;
-          mapViewElement.viewpoint = activeViewpoint; // Set target viewpoint to current viewpoint.
-          showAndHide(mapViewElement, sceneViewElement);
-        }
-      };
-
-      switchViewButton.addEventListener("click", (event) => switchView(event.target));
-
-    
-      // Wait for the view to be ready
+    switchViewButton.addEventListener("click", (event) => switchView(event.target));
 
 
-      // get the layer from the map
-      const jobsFromMap = mapViewElement.map.allLayers.find(
-          (jobsFromMap) => jobsFromMap.title === "Total Jobs",
-        );
-      
-      // get the layer from the scene
-      const jobsFromScene = sceneViewElement.map.allLayers.find(
-          (jobsFromScene) => jobsFromScene.title === "Total Jobs",
-        );
-
-      console.log(jobsFromMap);
-      console.log(jobsFromScene);
+    // Wait for the view to be ready
 
 
-      
+    // get the layer from the map
+    const jobsFromMap = mapViewElement.map.allLayers.find(
+      (jobsFromMap) => jobsFromMap.title === "Total Jobs",
+    );
 
-  
+    // get the layer from the scene
+    const jobsFromScene = sceneViewElement.map.allLayers.find(
+      (jobsFromScene) => jobsFromScene.title === "Total Jobs",
+    );
+
+    console.log(jobsFromMap);
+    console.log(jobsFromScene);
+
+    let currentYear = document.getElementById('yearSelect1').value;
 
 
 
+    // select the height
+    const heightslider2 = document.getElementById('heightSlider2');
 
-        // select the year
-        const yearSelect1 = document.getElementById('yearSelect1');
-        const yearSelect2 = document.getElementById('yearSelect2');
+    heightslider2.addEventListener('calciteSliderChange', () => {
 
-        yearSelect1.addEventListener('calciteSelectChange', () => {
-          const selectionText = yearSelect1.value;
-          const newField = 'N_' + selectionText;
-          yearSelect2.setAttribute('value', selectionText);
-
-          // Fix for 2D Map
-          if (jobsFromMap) {
-            const newRendererMap = jobsFromMap.renderer.clone();
-            newRendererMap.field = newField;
-            jobsFromMap.renderer = newRendererMap; // Re-assignment triggers the update
-          }
-
-          // Fix for 3D Scene
-          if (jobsFromScene) {
-            const newRendererScene = jobsFromScene.renderer.clone();
-            newRendererScene.field = newField;
-            newRendererScene.visualVariables[0].field = newField;
-            newRendererScene.visualVariables[1].field = newField;
-            jobsFromScene.renderer = newRendererScene; 
-          }
-
-          console.log("Updated field to:", newField);
-        });
+      if (jobsFromScene) {
+        const selectionText = Number(heightslider2.value);
         
-        yearSelect2.addEventListener('calciteSelectChange', () => {
-          const selectionText = yearSelect2.value;
-          const newField = 'N_' + selectionText;
-          yearSelect1.setAttribute('value', selectionText);
-
-          // Fix for 2D Map
-          if (jobsFromMap) {
-            const newRendererMap = jobsFromMap.renderer.clone();
-            newRendererMap.field = newField;
-            jobsFromMap.renderer = newRendererMap; // Re-assignment triggers the update
-          }
-
-          // Fix for 3D Scene
-          if (jobsFromScene) {
-            const newRendererScene = jobsFromScene.renderer.clone();
-            newRendererScene.field = newField;
-            newRendererScene.visualVariables[0].field = newField;
-            newRendererScene.visualVariables[1].field = newField;
-            jobsFromScene.renderer = newRendererScene; 
-          }
-
-          console.log("Updated field to:", newField);
-        });
+        const newRendererScene = jobsFromScene.renderer.clone();
+    
+        const densityFunction = `$feature.N_${currentYear} / $feature.ACRES * ${Number(selectionText)}`
+        newRendererScene.visualVariables[1].valueExpression = densityFunction
+        newRendererScene.visualVariables[1].valueExpressionTitle = `Density_${currentYear}`
+        jobsFromScene.renderer = newRendererScene;
+      }
+    });
 
 
+    // select the year
+    const yearSelect1 = document.getElementById('yearSelect1');
+    const yearSelect2 = document.getElementById('yearSelect2');
+
+
+    // ======================================
+    // Update the year from the 2d map
+    // ======================================
+    yearSelect1.addEventListener('calciteSelectChange', () => {
+      const selectionText = yearSelect1.value;
+      const newField = 'N_' + selectionText;
+      yearSelect2.setAttribute('value', selectionText);
+      currentYear = selectionText;
+      // Fix for 2D Map
+      if (jobsFromMap) {
+        const newRendererMap = jobsFromMap.renderer.clone();
+        newRendererMap.field = newField;
+        jobsFromMap.renderer = newRendererMap; // Re-assignment triggers the update
+      }
+
+      // Fix for 3D Scene
+      if (jobsFromScene) {
+        const newRendererScene = jobsFromScene.renderer.clone();
+        newRendererScene.field = newField;
+        newRendererScene.visualVariables[0].field = newField;
+        newRendererScene.visualVariables[1].field = newField;
+        jobsFromScene.renderer = newRendererScene;
+      }
+
+      console.log("Updated field to:", newField);
+    });
+
+    // ======================================
+    // Update the year from the 3d scene
+    // ======================================
+    yearSelect2.addEventListener('calciteSelectChange', () => {
+      const selectionText = yearSelect2.value;
+      const newField = 'N_' + selectionText;
+      yearSelect1.setAttribute('value', selectionText);
+      currentYear = selectionText;
+
+      // Fix for 2D Map
+      if (jobsFromMap) {
+        const newRendererMap = jobsFromMap.renderer.clone();
+        newRendererMap.field = newField;
+        jobsFromMap.renderer = newRendererMap; // Re-assignment triggers the update
+      }
+
+      // Fix for 3D Scene
+      if (jobsFromScene) {
+        const newRendererScene = jobsFromScene.renderer.clone();
+        newRendererScene.field = newField;
+        newRendererScene.visualVariables[0].field = newField;
+        newRendererScene.visualVariables[1].field = newField;
+        jobsFromScene.renderer = newRendererScene;
+      }
+
+      console.log("Updated field to:", newField);
+    });
 
 
 
 
 
-      // jobsFromMap.renderer.field = 'N_2023'
+
+
+    // jobsFromMap.renderer.field = 'N_2023'
 
 
 
@@ -238,6 +283,7 @@
 
 
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
