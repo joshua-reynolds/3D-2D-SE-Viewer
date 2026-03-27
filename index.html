@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Switch view from 2D to 3D | Sample | ArcGIS Maps SDK for JavaScript</title>
+  <title>Household & Jobs Forecast - RTP27</title>
 
   <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
   <script type="module" src="https://js.arcgis.com/5.0/"></script>
@@ -43,42 +43,40 @@
 
 <body>
   <arcgis-map item-id="6c8db1a136a24bb5970c0e9563f23c26" center="-111.9, 40.7" class="visible" scale="200000">
-    <calcite-panel slot="top-right" id="title" heading="SE Data Viewer"
-      description="Use the button to switch dimensions">
+    <calcite-panel slot="top-right" id="title" heading="Household & Jobs Forecast - RTP27"
+      description="Use the button to change dimensions">
     </calcite-panel>
     <arcgis-zoom slot="top-left"></arcgis-zoom>
     <arcgis-legend slot="bottom-right"></arcgis-legend>
 
     <calcite-panel slot="bottom-left" id="controls" heading="Change Display Properties">
 
-      <calcite-select id="varSelect1" label-text="Variable:">
-        <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
-        <calcite-option value="POP PROJECTIONS by TAZ">Population</calcite-option>
-        <calcite-option value="IND PROJECTIONS by TAZ">Industrial Jobs</calcite-option>
-        <calcite-option value="OTHR PROJECTIONS by TAZ">Office Jobs</calcite-option>
-        <calcite-option value="RTL PROJECTIONS by TAZ">Retail Jobs</calcite-option>
-        <calcite-option value="AEMP PROJECTIONS by TAZ">Total Jobs</calcite-option>
-        <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
-      </calcite-select><br />
+      <calcite-block expanded label="controls block">
+        <calcite-select id="varSelect1" label-text="Category:">
+          <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
+          <calcite-option value="TPCL PROJECTIONS by TAZ">Total Jobs</calcite-option>
+          <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
+        </calcite-select><br />
 
 
-      <calcite-select id="yearSelect1" label-text="Year:">
-        <calcite-option value="2023" selected>2023</calcite-option>
-        <calcite-option value="2025">2025</calcite-option>
-        <calcite-option value="2030">2030</calcite-option>
-        <calcite-option value="2035">2035</calcite-option>
-        <calcite-option value="2045">2045</calcite-option>
-        <calcite-option value="2050">2050</calcite-option>
-        <calcite-option value="2055">2055</calcite-option>
-      </calcite-select><br />
+        <calcite-select id="yearSelect1" label-text="Year:">
+          <calcite-option value="2023" selected>2023</calcite-option>
+          <calcite-option value="2025">2025</calcite-option>
+          <calcite-option value="2030">2030</calcite-option>
+          <calcite-option value="2035">2035</calcite-option>
+          <calcite-option value="2045">2045</calcite-option>
+          <calcite-option value="2050">2050</calcite-option>
+          <calcite-option value="2055">2055</calcite-option>
+        </calcite-select><br />
 
-
+      </calcite-block>
     </calcite-panel>
   </arcgis-map>
 
   <arcgis-scene item-id="72ecbc8e2c944657ae7d300ab4f8a345" center="-111.9, 40.7" scale="200000" camera-tilt="45">
-    <calcite-panel slot="top-right" id="title" heading="SE Data Viewer"
-      description="Use the button to switch dimensions">
+
+    <calcite-panel slot="top-right" id="title" heading="Household & Jobs Forecast - RTP27"
+      description="Use the button to change dimensions">
     </calcite-panel>
     <arcgis-zoom slot="top-left"></arcgis-zoom>
     <arcgis-navigation-toggle slot="top-left"></arcgis-navigation-toggle>
@@ -86,30 +84,28 @@
     <arcgis-legend slot="bottom-right"></arcgis-legend>
 
     <calcite-panel slot="bottom-left" id="controls" heading="Change Display Properties">
-
-      <calcite-select id="varSelect2" label-text="Variable:">
-        <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
-        <calcite-option value="POP PROJECTIONS by TAZ">Population</calcite-option>
-        <calcite-option value="IND PROJECTIONS by TAZ">Industrial Jobs</calcite-option>
-        <calcite-option value="OTHR PROJECTIONS by TAZ">Office Jobs</calcite-option>
-        <calcite-option value="RTL PROJECTIONS by TAZ">Retail Jobs</calcite-option>
-        <calcite-option value="AEMP PROJECTIONS by TAZ">Total Jobs</calcite-option>
-        <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
-      </calcite-select><br />
+      <calcite-block expanded label="controls block">
+        <calcite-select id="varSelect2" label-text="Category:">
+          <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
+          <calcite-option value="TPCL PROJECTIONS by TAZ">Total Jobs</calcite-option>
+          <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
+        </calcite-select><br />
 
 
-      <calcite-select id="yearSelect2" label-text="Year:">
-        <calcite-option value="2023" selected>2023</calcite-option>
-        <calcite-option value="2025">2025</calcite-option>
-        <calcite-option value="2030">2030</calcite-option>
-        <calcite-option value="2035">2035</calcite-option>
-        <calcite-option value="2045">2045</calcite-option>
-        <calcite-option value="2050">2050</calcite-option>
-        <calcite-option value="2055">2055</calcite-option>
-      </calcite-select><br />
+        <calcite-select id="yearSelect2" label-text="Year:">
+          <calcite-option value="2023" selected>2023</calcite-option>
+          <calcite-option value="2025">2025</calcite-option>
+          <calcite-option value="2030">2030</calcite-option>
+          <calcite-option value="2035">2035</calcite-option>
+          <calcite-option value="2045">2045</calcite-option>
+          <calcite-option value="2050">2050</calcite-option>
+          <calcite-option value="2055">2055</calcite-option>
+        </calcite-select><br />
 
-      <calcite-slider id="heightSlider2" label-text="Change Height:" value="10" step="10" min="0" max="100" snap=true
-        label-handles label-ticks </calcite-slider><br />
+        <calcite-slider id="heightSlider2" label-text="Height:" value="10" step="10" min="0" max="100" snap=true
+          label-handles label-ticks </calcite-slider><br />
+
+      </calcite-block>
     </calcite-panel>
 
 
@@ -165,45 +161,106 @@
 
     // Wait for the view to be ready
 
-
     // get the layer from the map
-    const jobsFromMap = mapViewElement.map.allLayers.find(
-      (jobsFromMap) => jobsFromMap.title === "Total Jobs",
+    let currentLyr = document.getElementById('varSelect1').value;
+
+    const lyrFromMap = mapViewElement.map.allLayers.find(
+      (lyrFromMap) => lyrFromMap.title === currentLyr,
     );
 
     // get the layer from the scene
-    const jobsFromScene = sceneViewElement.map.allLayers.find(
-      (jobsFromScene) => jobsFromScene.title === "Total Jobs",
+    const lyrFromScene = sceneViewElement.map.allLayers.find(
+      (lyrFromScene) => lyrFromScene.title === currentLyr,
     );
 
-    console.log(jobsFromMap);
-    console.log(jobsFromScene);
+    console.log(lyrFromMap);
+    console.log(lyrFromScene);
 
-    let currentYear = document.getElementById('yearSelect1').value;
-
-
+    
 
     // select the height
     const heightslider2 = document.getElementById('heightSlider2');
 
-    heightslider2.addEventListener('calciteSliderChange', () => {
+    // select the year
+    const yearSelect1 = document.getElementById('yearSelect1');
+    const yearSelect2 = document.getElementById('yearSelect2');
 
-      if (jobsFromScene) {
+    let currentYear = yearSelect1.value;
+    let currentFactor = Number(heightslider2.value)
+
+    // // ======================================
+    // // Update the category from the 2d map
+    // // ======================================
+    // yearSelect1.addEventListener('calciteSelectChange', () => {
+    //   const selectionText = yearSelect1.value;
+    //   const newField = 'N_' + selectionText;
+    //   yearSelect2.setAttribute('value', selectionText);
+    //   // Fix for 2D Map
+    //   if (lyrFromMap) {
+    //     const newRendererMap = lyrFromMap.renderer.clone();
+    //     newRendererMap.field = newField;
+    //     lyrFromMap.renderer = newRendererMap; // Re-assignment triggers the update
+    //   }
+
+    //   // Fix for 3D Scene
+    //   if (lyrFromScene) {
+    //     const newRendererScene = lyrFromScene.renderer.clone();
+    //     newRendererScene.field = newField;
+    //     newRendererScene.visualVariables[0].field = newField;
+    //     newRendererScene.visualVariables[1].field = newField;
+    //     lyrFromScene.renderer = newRendererScene;
+    //   }
+
+    //   console.log("Updated field to:", newField);
+    // });
+
+    // // ======================================
+    // // Update the category from the 3d scene
+    // // ======================================
+    // yearSelect2.addEventListener('calciteSelectChange', () => {
+    //   const selectionText = yearSelect2.value;
+    //   const newField = 'N_' + selectionText;
+    //   yearSelect1.setAttribute('value', selectionText);
+    //   currentYear = selectionText;
+
+    //   // Fix for 2D Map
+    //   if (lyrFromMap) {
+    //     const newRendererMap = lyrFromMap.renderer.clone();
+    //     newRendererMap.field = newField;
+    //     lyrFromMap.renderer = newRendererMap; // Re-assignment triggers the update
+    //   }
+
+    //   // Fix for 3D Scene
+    //   if (lyrFromScene) {
+    //     const newRendererScene = lyrFromScene.renderer.clone();
+    //     newRendererScene.field = newField;
+    //     newRendererScene.visualVariables[0].field = newField;
+    //     newRendererScene.visualVariables[1].field = newField;
+    //     lyrFromScene.renderer = newRendererScene;
+    //   }
+
+    //   console.log("Updated field to:", newField);
+    // });
+
+
+    // =====================================================
+    // Update the extrusion using slider in the 3d map
+    // =====================================================
+
+    heightslider2.addEventListener('calciteSliderChange', () => {
+      if (lyrFromScene) {
         const selectionText = Number(heightslider2.value);
-        
-        const newRendererScene = jobsFromScene.renderer.clone();
-    
+        currentFactor = selectionText;
+        const newRendererScene = lyrFromScene.renderer.clone();
+
         const densityFunction = `$feature.N_${currentYear} / $feature.ACRES * ${Number(selectionText)}`
         newRendererScene.visualVariables[1].valueExpression = densityFunction
         newRendererScene.visualVariables[1].valueExpressionTitle = `Density_${currentYear}`
-        jobsFromScene.renderer = newRendererScene;
+        lyrFromScene.renderer = newRendererScene;
       }
     });
 
 
-    // select the year
-    const yearSelect1 = document.getElementById('yearSelect1');
-    const yearSelect2 = document.getElementById('yearSelect2');
 
 
     // ======================================
@@ -214,20 +271,26 @@
       const newField = 'N_' + selectionText;
       yearSelect2.setAttribute('value', selectionText);
       currentYear = selectionText;
+
+      const densityFunction = `$feature.N_${currentYear} / $feature.ACRES`
+
       // Fix for 2D Map
-      if (jobsFromMap) {
-        const newRendererMap = jobsFromMap.renderer.clone();
-        newRendererMap.field = newField;
-        jobsFromMap.renderer = newRendererMap; // Re-assignment triggers the update
+      if (lyrFromMap) {
+        const newRendererMap = lyrFromMap.renderer.clone();
+        newRendererMap.valueExpression = densityFunction;
+        lyrFromMap.renderer = newRendererMap; // Re-assignment triggers the update
       }
 
       // Fix for 3D Scene
-      if (jobsFromScene) {
-        const newRendererScene = jobsFromScene.renderer.clone();
+      if (lyrFromScene) {
+        const newRendererScene = lyrFromScene.renderer.clone();
         newRendererScene.field = newField;
-        newRendererScene.visualVariables[0].field = newField;
-        newRendererScene.visualVariables[1].field = newField;
-        jobsFromScene.renderer = newRendererScene;
+        newRendererScene.visualVariables[0].field = densityFunction;
+
+        const densityFactorFunction = `$feature.N_${currentYear} / $feature.ACRES * ${currentFactor}`;
+        newRendererScene.visualVariables[1].field = densityFactorFunction;
+
+        lyrFromScene.renderer = newRendererScene;
       }
 
       console.log("Updated field to:", newField);
@@ -242,38 +305,28 @@
       yearSelect1.setAttribute('value', selectionText);
       currentYear = selectionText;
 
+      const densityFunction = `$feature.N_${currentYear} / $feature.ACRES`
+
       // Fix for 2D Map
-      if (jobsFromMap) {
-        const newRendererMap = jobsFromMap.renderer.clone();
-        newRendererMap.field = newField;
-        jobsFromMap.renderer = newRendererMap; // Re-assignment triggers the update
+      if (lyrFromMap) {
+        const newRendererMap = lyrFromMap.renderer.clone();
+        newRendererMap.valueExpression = densityFunction;
+        lyrFromMap.renderer = newRendererMap; // Re-assignment triggers the update
       }
 
       // Fix for 3D Scene
-      if (jobsFromScene) {
-        const newRendererScene = jobsFromScene.renderer.clone();
+      if (lyrFromScene) {
+        const newRendererScene = lyrFromScene.renderer.clone();
         newRendererScene.field = newField;
-        newRendererScene.visualVariables[0].field = newField;
-        newRendererScene.visualVariables[1].field = newField;
-        jobsFromScene.renderer = newRendererScene;
+        newRendererScene.visualVariables[0].field = densityFunction;
+
+        const densityFactorFunction = `$feature.N_${currentYear} / $feature.ACRES * ${currentFactor}`;
+        newRendererScene.visualVariables[1].field = densityFactorFunction;
+        lyrFromScene.renderer = newRendererScene;
       }
 
       console.log("Updated field to:", newField);
     });
-
-
-
-
-
-
-
-    // jobsFromMap.renderer.field = 'N_2023'
-
-
-
-
-
-
 
 
 
