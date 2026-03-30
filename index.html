@@ -172,9 +172,14 @@
     const lyrFromScene = sceneViewElement.map.allLayers.find(
       (lyrFromScene) => lyrFromScene.title === currentLyr,
     );
+    // get the layer from the scene
+    const lyrFromScene2 = sceneViewElement.map.allLayers.find(
+      (lyrFromScene2) => lyrFromScene2.title === currentLyr + '-Copy',
+    );
 
-    console.log(lyrFromMap);
-    console.log(lyrFromScene);
+    console.log('2D layer',lyrFromMap);
+    console.log('3D layer',lyrFromScene);
+    console.log('3D layer 2',lyrFromScene2);
 
     
 
@@ -284,11 +289,15 @@
       // Fix for 3D Scene
       if (lyrFromScene) {
         const newRendererScene = lyrFromScene.renderer.clone();
-        newRendererScene.field = newField;
-        newRendererScene.visualVariables[0].field = densityFunction;
+        // newRendererScene.field = newField;
+        newRendererScene.valueExpression = densityFunction;
+        newRendererScene.visualVariables[0].valueExpression = densityFunction;
+        
+        // newRendererScene.visualVariables[0].field = densityFunction;
 
         const densityFactorFunction = `$feature.N_${currentYear} / $feature.ACRES * ${currentFactor}`;
-        newRendererScene.visualVariables[1].field = densityFactorFunction;
+        newRendererScene.visualVariables[1].valueExpression = densityFactorFunction
+        // newRendererScene.visualVariables[1].field = densityFactorFunction;
 
         lyrFromScene.renderer = newRendererScene;
       }
@@ -317,11 +326,16 @@
       // Fix for 3D Scene
       if (lyrFromScene) {
         const newRendererScene = lyrFromScene.renderer.clone();
-        newRendererScene.field = newField;
-        newRendererScene.visualVariables[0].field = densityFunction;
+        // newRendererScene.field = newField;
+        newRendererScene.valueExpression = densityFunction;
+        newRendererScene.visualVariables[0].valueExpression = densityFunction;
+        
+        // newRendererScene.visualVariables[0].field = densityFunction;
 
         const densityFactorFunction = `$feature.N_${currentYear} / $feature.ACRES * ${currentFactor}`;
-        newRendererScene.visualVariables[1].field = densityFactorFunction;
+        newRendererScene.visualVariables[1].valueExpression = densityFactorFunction
+        // newRendererScene.visualVariables[1].field = densityFactorFunction;
+
         lyrFromScene.renderer = newRendererScene;
       }
 
