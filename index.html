@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>WFRC Household & Jobs Forecast - RTP27</title>
+  <title>WFRC Preliminary Household & Jobs Forecast</title>
 
   <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
   <script type="module" src="https://js.arcgis.com/5.0/"></script>
@@ -43,8 +43,8 @@
 
 <body>
   <arcgis-map item-id="6c8db1a136a24bb5970c0e9563f23c26" center="-111.9, 40.7" class="visible" scale="200000">
-    <calcite-panel slot="top-right" id="title" heading="Household & Jobs Forecast - RTP27"
-      description="Use the button to change dimensions">
+    <calcite-panel slot="top-right" id="title" heading="WFRC Preliminary Household & Jobs Forecast"
+      description="2027-2055 Regional Transportation Plan">
     </calcite-panel>
     <arcgis-zoom slot="top-left"></arcgis-zoom>
     <arcgis-legend slot="bottom-right"></arcgis-legend>
@@ -53,9 +53,9 @@
 
       <calcite-block expanded label="controls block">
         <calcite-select id="varSelect1" label-text="Category:">
-          <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
-          <calcite-option value="TPCL PROJECTIONS by TAZ">Total Jobs</calcite-option>
-          <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
+          <calcite-option value="HH PROJECTIONS by TAZ" selected>Household Density</calcite-option>
+          <calcite-option value="TPCL PROJECTIONS by TAZ">Job Density (Total)</calcite-option>
+          <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Density</calcite-option>
         </calcite-select><br />
 
 
@@ -75,8 +75,8 @@
 
   <arcgis-scene item-id="72ecbc8e2c944657ae7d300ab4f8a345" center="-111.9, 40.7" scale="200000" camera-tilt="45">
 
-    <calcite-panel slot="top-right" id="title" heading="WFRC Household & Jobs Forecast - RTP27"
-      description="Use the button to change dimensions">
+    <calcite-panel slot="top-right" id="title" heading="WFRC Preliminary Household & Jobs Forecast"
+      description="2027-2055 Regional Transportation Plan">
     </calcite-panel>
     <arcgis-zoom slot="top-left"></arcgis-zoom>
     <arcgis-navigation-toggle slot="top-left"></arcgis-navigation-toggle>
@@ -87,9 +87,9 @@
       <calcite-block expanded label="controls block">
 
         <calcite-select id="varSelect2" label-text="Category:">
-          <calcite-option value="HH PROJECTIONS by TAZ" selected>Households</calcite-option>
-          <calcite-option value="TPCL PROJECTIONS by TAZ">Total Jobs</calcite-option>
-          <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Intensity</calcite-option>
+          <calcite-option value="HH PROJECTIONS by TAZ" selected>Households Density</calcite-option>
+          <calcite-option value="TPCL PROJECTIONS by TAZ">Jobs Density (Total)</calcite-option>
+          <calcite-option value="HJI PROJECTIONS by TAZ">HH+Job Density</calcite-option>
         </calcite-select><br />
 
 
