@@ -1,4 +1,3 @@
-# 3D-2D-SE-Viewer
+# APP-3D-Households-Jobs-Forecast
 
-- A quick web app showcasing WFRC's hh and job forecast in a 2D/3D viewer
-- Coded this up at the ESRI Dev Summit 2026
+- Displays WFRC's households and jobs forecast in either 2D or 3D using ESRI's Maps SDK for Javascript
